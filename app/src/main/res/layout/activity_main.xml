@@ -31,5 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="From Iterable" />
+
+        <Button
+            android:id="@+id/bRangeRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RangeRepeat" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

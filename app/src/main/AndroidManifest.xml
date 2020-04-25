@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FromIterableActivity"></activity>
+        <activity android:name=".RangeRepeatActivity"></activity>
+        <activity android:name=".FromIterableActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

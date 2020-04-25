@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity{
 
-    private Button bCreate,bFromIterable;
+    private Button bCreate,bFromIterable,bRangeRepeat;
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.bFromIterable:
                     intent = new Intent(MainActivity.this,FromIterableActivity.class);
                     break;
+                case R.id.bRangeRepeat:
+                    intent = new Intent(MainActivity.this,RangeRepeatActivity.class);
                 default:
                     break;
             }
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity{
         bCreate.setOnClickListener(listener);
         bFromIterable = findViewById(R.id.bFromIterable);
         bFromIterable.setOnClickListener(listener);
+        bRangeRepeat = findViewById(R.id.bRangeRepeat);
+        bRangeRepeat.setOnClickListener(listener);
     }
 
 }

@@ -10,6 +10,7 @@ import java.util.Random;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
@@ -17,6 +18,7 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CreateActivity extends AppCompatActivity {
@@ -70,9 +72,46 @@ public class CreateActivity extends AppCompatActivity {
 
             @Override
             public void onComplete() {
-                tvContent.append("\nFinished.");
+                tvContent.append("\nCreate Finished.");
             }
         });
+
+        tvContent.append("\n\nAlso testing 'just' operator here");
+
+        Observable<Integer> justObservable = Observable.just(1,2,3,4,5,6)
+                .subscribeOn(Schedulers.io())
+                .filter(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) throws Throwable {
+                        Thread.sleep(rnd.nextInt(1000));
+                        return true;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread());
+
+        justObservable.subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                disposable.add(d);
+            }
+
+            @Override
+            public void onNext(@NonNull Integer integer) {
+                tvContent.append("\n" + integer);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                tvContent.append("\nJust Finished");
+            }
+        });
+
+        Flowable.just(15,20,25,30).subscribe(System.out::println);
     }
 
     @Override
