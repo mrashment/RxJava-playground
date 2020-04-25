@@ -28,6 +28,7 @@ public class RangeRepeatActivity extends AppCompatActivity {
         tvContent = findViewById(R.id.tvContent);
         tvContent.append("Looping 3 times");
 
+        // creates an observable from specified range of numbers
         Observable<Integer> observable = Observable.range(0,5)
                 .subscribeOn(Schedulers.io())
                 .filter(new Predicate<Integer>() {
@@ -40,8 +41,10 @@ public class RangeRepeatActivity extends AppCompatActivity {
                 .map(k -> 10 - k)
                 .observeOn(AndroidSchedulers.mainThread());
 
+
         observable
-                .repeat(3)
+                .repeat(3)  // repeats the observable 3 times (actually returns a new one I think).
+                            // Can call with no arguments to repeat infinitely.
                 .subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {

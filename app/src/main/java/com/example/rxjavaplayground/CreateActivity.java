@@ -37,8 +37,10 @@ public class CreateActivity extends AppCompatActivity {
         rnd = new Random();
         tvContent = findViewById(R.id.tvContent);
 
+        // the disposable prevents memory leaks, clear it when done with your tasks
         disposable = new CompositeDisposable();
 
+        // creates a basic observable which triggers its observers 10 times
         Observable<Integer> observable = Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Integer> emitter) throws Throwable {
@@ -78,6 +80,7 @@ public class CreateActivity extends AppCompatActivity {
 
         tvContent.append("\n\nAlso testing 'just' operator here");
 
+        // an easy way to create an observable from a few objects
         Observable<Integer> justObservable = Observable.just(1,2,3,4,5,6)
                 .subscribeOn(Schedulers.io())
                 .filter(new Predicate<Integer>() {
@@ -111,6 +114,8 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+        // Flowables have backpressure (or handle backpressure?), meaning they supposedly handle overflowing or
+        // abnormally terminating events better. Or something.
         Flowable.just(15,20,25,30).subscribe(System.out::println);
     }
 

@@ -35,6 +35,7 @@ public class BufferClicksActivity extends AppCompatActivity {
         tvMessage = findViewById(R.id.tvMessage);
         disposable = new CompositeDisposable();
 
+        // registers clicks on a view to a new observable. This one buffers, meaning it aggregates several events before emitting them in a single object
         RxView.clicks(bClick)
                 .map(u -> 1)
                 .buffer(1000, TimeUnit.MILLISECONDS)

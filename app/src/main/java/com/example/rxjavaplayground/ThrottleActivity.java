@@ -34,6 +34,8 @@ public class ThrottleActivity extends AppCompatActivity {
         tvMessage = findViewById(R.id.tvMessage);
         disposable = new CompositeDisposable();
 
+        // throttleFirst stops further events from registering (from the given view) for the specified period of time
+        // this is how some search bars work in social media apps
         RxView.clicks(bClick)
                 .throttleFirst(4, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
