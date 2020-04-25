@@ -37,6 +37,7 @@ public class RangeRepeatActivity extends AppCompatActivity {
                         return true;
                     }
                 })
+                .map(k -> 10 - k)
                 .observeOn(AndroidSchedulers.mainThread());
 
         observable
