@@ -9,30 +9,30 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity{
 
-    private Button bCreate,bFromIterable,bRangeRepeat,bBuffer;
+    private Button bCreate,bFromIterable,bRangeRepeat,bBuffer,bThrottle;
 
-    private View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            switch(v.getId()) {
-                case R.id.bCreate:
-                    intent = new Intent(MainActivity.this,CreateActivity.class);
-                    break;
-                case R.id.bFromIterable:
-                    intent = new Intent(MainActivity.this,FromIterableActivity.class);
-                    break;
-                case R.id.bRangeRepeat:
-                    intent = new Intent(MainActivity.this,RangeRepeatActivity.class);
-                    break;
-                case R.id.bBuffer:
-                    intent = new Intent(MainActivity.this,BufferClicksActivity.class);
-                    break;
-                default:
-                    break;
-            }
-            startActivity(intent);
+    private View.OnClickListener listener = v -> {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        switch(v.getId()) {
+            case R.id.bCreate:
+                intent = new Intent(MainActivity.this,CreateActivity.class);
+                break;
+            case R.id.bFromIterable:
+                intent = new Intent(MainActivity.this,FromIterableActivity.class);
+                break;
+            case R.id.bRangeRepeat:
+                intent = new Intent(MainActivity.this,RangeRepeatActivity.class);
+                break;
+            case R.id.bBuffer:
+                intent = new Intent(MainActivity.this,BufferClicksActivity.class);
+                break;
+            case R.id.bThrottle:
+                intent = new Intent(MainActivity.this,ThrottleActivity.class);
+                break;
+            default:
+                break;
         }
+        startActivity(intent);
     };
 
     @Override
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity{
         bRangeRepeat.setOnClickListener(listener);
         bBuffer = findViewById(R.id.bBuffer);
         bBuffer.setOnClickListener(listener);
+        bThrottle = findViewById(R.id.bThrottle);
+        bThrottle.setOnClickListener(listener);
     }
 
 }

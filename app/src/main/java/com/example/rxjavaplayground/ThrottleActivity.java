@@ -8,46 +8,45 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding3.view.RxView;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import kotlin.Unit;
 
-public class BufferClicksActivity extends AppCompatActivity {
+public class ThrottleActivity extends AppCompatActivity {
 
     private Button bClick;
     private TextView tvMessage;
     private CompositeDisposable disposable;
+    private long currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buffer_clicks);
 
+        currentTime = System.currentTimeMillis();
+
         bClick = findViewById(R.id.bClick);
         tvMessage = findViewById(R.id.tvMessage);
         disposable = new CompositeDisposable();
 
         RxView.clicks(bClick)
-                .map(u -> 1)
-                .buffer(1000, TimeUnit.MILLISECONDS)
+                .throttleFirst(4, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Integer>>() {
+                .subscribe(new Observer<Unit>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         disposable.add(d);
                     }
 
                     @Override
-                    public void onNext(List<Integer> integers) {
-                        tvMessage.setText("You clicked " + integers.size() + " times in 1 second.");
+                    public void onNext(Unit unit) {
+                        tvMessage.setText("Last object emitted " + (System.currentTimeMillis() - currentTime)/1000.0 + " seconds ago.");
+                        currentTime = System.currentTimeMillis();
                     }
 
                     @Override
@@ -56,10 +55,10 @@ public class BufferClicksActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onComplete() {
-
+                    public void onComplete(){
                     }
                 });
+
     }
 
     @Override

@@ -43,5 +43,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Buffer" />
+
+        <Button
+            android:id="@+id/bThrottle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Throttle" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
