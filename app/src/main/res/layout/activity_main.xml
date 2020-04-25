@@ -25,5 +25,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create example" />
+
+        <Button
+            android:id="@+id/bFromIterable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="From Iterable" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

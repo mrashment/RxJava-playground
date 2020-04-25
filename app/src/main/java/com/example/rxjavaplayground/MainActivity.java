@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity{
 
-    private Button bCreate;
+    private Button bCreate,bFromIterable;
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity{
             switch(v.getId()) {
                 case R.id.bCreate:
                     intent = new Intent(MainActivity.this,CreateActivity.class);
+                    break;
+                case R.id.bFromIterable:
+                    intent = new Intent(MainActivity.this,FromIterableActivity.class);
                     break;
                 default:
                     break;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity{
     public void initViews() {
         bCreate = findViewById(R.id.bCreate);
         bCreate.setOnClickListener(listener);
+        bFromIterable = findViewById(R.id.bFromIterable);
+        bFromIterable.setOnClickListener(listener);
     }
 
 }
